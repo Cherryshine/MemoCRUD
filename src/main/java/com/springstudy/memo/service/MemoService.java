@@ -4,6 +4,7 @@ import com.springstudy.memo.dto.MemoRequestDto;
 import com.springstudy.memo.dto.MemoResponseDto;
 import com.springstudy.memo.entity.Memo;
 import com.springstudy.memo.repository.MemoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class MemoService {
 
     private final MemoRepository memoRepository;
-
+        @Autowired
         public MemoService(MemoRepository memoRepository) {
             this.memoRepository = memoRepository;
 
