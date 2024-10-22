@@ -3,7 +3,6 @@ package com.springstudy.memo.controller;
 import com.springstudy.memo.dto.MemoRequestDto;
 import com.springstudy.memo.dto.MemoResponseDto;
 import com.springstudy.memo.service.MemoService;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,11 +11,11 @@ import java.util.List;
 @RequestMapping("/api")
 public class MemoController {
 
-   // private final JdbcTemplate jdbcTemplate;
     private final MemoService memoService;
-    public MemoController(JdbcTemplate jdbcTemplate) {
-       this.memoService = new MemoService(jdbcTemplate);
-        // this.jdbcTemplate = jdbcTemplate;
+
+    public MemoController(MemoService memoService) {
+       this.memoService = memoService;
+
     }
 
     @PostMapping("/memos")
