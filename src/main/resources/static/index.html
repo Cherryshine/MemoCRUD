@@ -98,7 +98,7 @@
     }
 
     textarea.field {
-      width: 502px !important;
+      width: 538px !important;
       height: 146px;
       border-radius: 5px;
       background-color: #ffffff;
@@ -386,12 +386,13 @@
 
 <nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
-    <form class="d-flex" role="search" onsubmit="searchMemos(event)">
+    <form class="d-flex ms-auto" role="search" onsubmit="searchMemos(event)">
       <input class="form-control me-2" type="search" name="keyword" id="searchKeyword" placeholder="메모를 검색해보세요" aria-label="Search">
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
   </div>
 </nav>
+
 <script>
   // 검색 결과를 가져와서 보여줍니다.
   function searchMemos(event) {
@@ -445,6 +446,31 @@
                   rows="10"></textarea>
 <!--                <button class="btn btn-danger" onclick="writePost()">작성하기</button>-->
     <img src="images/send.png" alt="" onclick="writePost()">
+    <script>
+      const textarea = document.getElementById('contents');
+      let isComposing = false;
+
+      textarea.addEventListener('keydown', function(event) {
+        if (event.isComposing || isComposing) return; // 입력 중이라면 중복 호출 방지
+
+        if (event.key === 'Enter') {
+          if (event.shiftKey) {
+            return; // Shift + Enter: 줄바꿈
+          } else {
+            event.preventDefault(); // 기본 Enter 동작 방지
+            isComposing = true; // 중복 호출 방지
+            writePost(); // 글 등록 함수 호출
+          }
+        }
+      });
+
+      textarea.addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+          isComposing = false; // Enter 키에서 손을 뗄 때 다시 호출 가능
+        }
+      });
+    </script>
+
   </div>
   <div id="cards-box" class="area-read">
     <div class="card">
